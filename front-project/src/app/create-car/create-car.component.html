@@ -1,0 +1,238 @@
+<div class="p-5 bg-light" style=" border-radius: 20px;">
+  <div class="row" *ngIf="responseOptions">
+    <div class="col">
+      <div class="col-10" style="text-align: right;">
+        <div class="form-group row">
+          <label for="title" class="col-3 col-form-label">Заголовок<span style="color: #C91414;">*</span>:</label>
+          <div class="col-9">
+            <input maxlength="70" type="text" class="form-control" id="title" name="title" [(ngModel)]="newCar.title"
+                   required minlength="4" #title="ngModel" placeholder="Заголовок от 4 символов">
+            <div [hidden]="title.valid || title.untouched" class="alert alert-danger">
+              Некорректный заголовок
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="vin_code" class="col-3 col-form-label">VIN код: </label>
+          <div class="col-4">
+            <input maxlength="20" type="text" class="form-control" id="vin_code" [(ngModel)]="newCar.vin_code">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="brand" class="col-3 col-form-label">Марка<span style="color: #C91414;">*</span>:</label>
+          <div class="col-3">
+            <select class="form-control" id="brand" (change)="changeCarModels($event)" [(ngModel)]="newCar.brand"
+                    required pattern="[1-9]" #brand="ngModel">
+              <option value="{{i.id}}" *ngFor="let i of carBrand">
+                {{i.car_brand}}
+              </option>
+            </select>
+          </div>
+          <div [hidden]="brand.valid || brand.untouched" class="col alert alert-danger">
+            Выберите Марку
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="model" class="col-3 col-form-label">Модель<span style="color: #C91414;">*</span>:</label>
+          <div class="col-3">
+            <select class="form-control" id="model" [(ngModel)]="newCar.car_model"
+                    required pattern="[1-9]" #model="ngModel">
+              <option value="{{i.id}}" *ngFor="let i of carModel">
+                {{i.car_model}}
+              </option>
+            </select>
+          </div>
+          <div [hidden]="model.valid || model.untouched" class="col alert alert-danger">
+            Выберите Модель
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="modification" class="col-3 col-form-label">Модификацыя: </label>
+          <div class="col-3">
+            <input maxlength="20" type="text" class="form-control" id="modification" [(ngModel)]="newCar.modification">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="year" class="col-3 col-form-label">Год<span style="color: #C91414;">*</span>: </label>
+          <div class="col-3">
+            <input maxlength="20" type="text" class="form-control" id="year" [(ngModel)]="newCar.year"
+                   required pattern="[0-9]{4}" #year="ngModel" placeholder="1991 год">
+          </div>
+          <div [hidden]="year.valid || year.untouched" class="col alert alert-danger">
+            Некорректный Год
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="engine_displacement" class="col-3 col-form-label">Обьем двигателя<span
+            style="color: #C91414;">*</span>: </label>
+          <div class="col-3">
+            <input maxlength="20" type="text" class="form-control" id="engine_displacement"
+                   [(ngModel)]="newCar.engine_displacement" required pattern="[0-9]{4,5}"
+                   #engine_displacement="ngModel" placeholder="2400 куб.см">
+          </div>
+          <div [hidden]="engine_displacement.valid || engine_displacement.untouched" class="col alert alert-danger">
+            Некорректный обьем двигателя
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="mileage" class="col-3 col-form-label">Пробег<span style="color: #C91414;">*</span>: </label>
+          <div class="col-3">
+            <input maxlength="20" type="text" class="form-control" id="mileage" [(ngModel)]="newCar.mileage"
+                   required pattern="[0-9]{1,8}" #mileage="ngModel" placeholder="1 км">
+          </div>
+          <div [hidden]="mileage.valid || mileage.untouched" class="col alert alert-danger">
+            Некорректный пробег
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="price" class="col-3 col-form-label">Цена<span style="color: #C91414;">*</span>: </label>
+          <div class="col-3">
+            <input maxlength="12" type="text" class="form-control" id="price" [(ngModel)]="newCar.price"
+                   required pattern="[0-9]{1,10}([.]{0,1})?([0-9]{0,2})?$" #price="ngModel"
+                   placeholder="1234.41 грн">
+          </div>
+          <div [hidden]="price.valid || price.untouched" class="col alert alert-danger">
+            Некорректная Цена
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="type_fuel" class="col-3 col-form-label">Топливо<span style="color: #C91414;">*</span>:</label>
+          <div class="col-3">
+            <select class="form-control" id="type_fuel" [(ngModel)]="newCar.type_fuel"
+                    required pattern="[0-9]" #type_fuel="ngModel">
+              <option value="{{i.value}}" *ngFor="let i of responseOptions.type_fuel.choices">
+                {{i.display_name}}
+              </option>
+            </select>
+          </div>
+          <div [hidden]="type_fuel.valid || type_fuel.untouched" class="col alert alert-danger">
+            Выберите тип топлива
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="color" class="col-3 col-form-label">Цвет<span style="color: #C91414;">*</span>:</label>
+          <div class="col-3">
+            <select class="form-control" id="color" [(ngModel)]="newCar.color"
+                    required pattern="[0-9]" #color="ngModel">
+              <option value="{{i.value}}" *ngFor="let i of responseOptions.color.choices">
+                {{i.display_name}}
+              </option>
+            </select>
+          </div>
+          <div [hidden]="color.valid || color.untouched" class="col alert alert-danger">
+            Выберите цвет
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="body_style" class="col-3 col-form-label">Тип Кузова<span style="color: #C91414;">*</span>:</label>
+          <div class="col-3">
+            <select class="form-control" id="body_style" [(ngModel)]="newCar.body_style"
+                    required pattern="[0-9]" #body_style="ngModel">
+              <option value="{{i.value}}" *ngFor="let i of responseOptions.body_style.choices">
+                {{i.display_name}}
+              </option>
+            </select>
+          </div>
+          <div [hidden]="body_style.valid || body_style.untouched" class="col alert alert-danger">
+            Выберите тип кузова
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="transmission" class="col-3 col-form-label">Тип КПП<span style="color: #C91414;">*</span>:</label>
+          <div class="col-3">
+            <select class="form-control" id="transmission" [(ngModel)]="newCar.transmission"
+                    required pattern="[0-9]" #transmission="ngModel">
+              <option value="{{i.value}}" *ngFor="let i of responseOptions.transmission.choices">
+                {{i.display_name}}
+              </option>
+            </select>
+          </div>
+          <div [hidden]="transmission.valid || transmission.untouched" class="col alert alert-danger">
+            Выберите тип кпп
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="car_condition" class="col-3 col-form-label">Состояние Автомобиля<span
+            style="color: #C91414;">*</span>:</label>
+          <div class="col-3">
+            <select class="form-control" id="car_condition" [(ngModel)]="newCar.car_condition"
+                    required pattern="[0-9]" #car_condition="ngModel">
+              <option value="{{i.value}}" *ngFor="let i of responseOptions.car_condition.choices">
+                {{i.display_name}}
+              </option>
+            </select>
+          </div>
+          <div [hidden]="car_condition.valid || car_condition.untouched" class="col alert alert-danger">
+            Выберите состояние авто
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="interior_material" class="col-3 col-form-label">Салон<span
+            style="color: #C91414;">*</span>:</label>
+          <div class="col-3">
+            <select class="form-control" id="interior_material" [(ngModel)]="newCar.interior_material"
+                    required pattern="[0-9]" #interior_material="ngModel">
+              <option value="{{i.value}}" *ngFor="let i of responseOptions.interior_material.choices">
+                {{i.display_name}}
+              </option>
+            </select>
+          </div>
+          <div [hidden]="interior_material.valid || interior_material.untouched" class="col alert alert-danger">
+            Выберите салон
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-check form-check-inline col-3 my-2" *ngFor="let i of responseOptions.car_features.choices">
+          <input class="form-check-input" type="checkbox" id="car_features_{{i.value}}" value="{{i.value}}"
+                 [(ngModel)]="carFeatures[i.value]">
+          <label class="form-check-label" for="car_features_{{i.value}}">{{i.display_name}}</label>
+        </div>
+
+        <hr>
+
+        <div class="form-check form-check-inline col-3 my-2" *ngFor="let i of responseOptions.car_security.choices">
+          <input class="form-check-input" type="checkbox" id="car_security_{{i.value}}" value="{{i.value}}"
+                 [(ngModel)]="carSecurity[i.value]">
+          <label class="form-check-label" for="car_security_{{i.value}}">{{i.display_name}}</label>
+        </div>
+
+        <hr>
+
+
+      </div>
+      <div class="form-group">
+        <label for="description">Описание<span style="color: #C91414;">*</span>:</label>
+        <textarea maxlength="9000" class="form-control" id="description" rows="7"
+                  [(ngModel)]="newCar.description" required minlength="10" #description="ngModel"
+                  placeholder="Описание от 10 символов"></textarea>
+        <div [hidden]="description.valid || description.untouched" class="col alert alert-danger">
+          Некорректное описание
+        </div>
+      </div>
+      <button
+        [disabled]="title.invalid  || brand.invalid || model.invalid || year.invalid || engine_displacement.invalid ||
+        mileage.invalid || price.invalid || type_fuel.invalid || color.invalid || body_style.invalid || transmission.invalid ||
+        car_condition.invalid || interior_material.invalid || description.invalid "
+        type="submit" class="btn btn-primary"
+        (click)="sendDataPOST()" routerLink="/">Создать
+      </button>
+    </div>
+  </div>
+
+</div>

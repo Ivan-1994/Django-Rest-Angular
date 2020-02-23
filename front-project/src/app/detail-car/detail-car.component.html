@@ -1,0 +1,29 @@
+<div class="p-5 bg-light" style=" border-radius: 20px;">
+  <div *ngIf="carDetail" class="row">
+    <div class="m-2 col-12">Заголовок: {{carDetail.title}}</div>
+    <div class="m-2 col-5">Марка: {{carDetail.brand}}</div>
+    <div class="m-2 col-5">Модель: {{carDetail.car_model}}</div>
+    <div class="m-2 col-5">Модификацыя: {{carDetail.modification}}</div>
+    <div class="m-2 col-5">Год: {{carDetail.year}}</div>
+    <div class="m-2 col-5">Пробег: {{carDetail.mileage}}</div>
+    <div class="m-2 col-5">Обьем двигателя: {{carDetail.engine_displacement}}</div>
+    <div class="m-2 col-5">Тип Кузова: {{carDetail.body_style}}</div>
+    <div class="m-2 col-5">Топливо: {{carDetail.type_fuel}}</div>
+    <div class="m-2 col-5">Цвет: {{carDetail.color}}</div>
+    <div class="m-2 col-5">Тип КПП: {{carDetail.transmission}}</div>
+    <div class="m-2 col-5">Состояние Автомобиля: {{carDetail.car_condition}}</div>
+    <div class="m-2 col-5">Салон: {{carDetail.interior_material}}</div>
+    <div class="m-2 col-5">VIN код: {{carDetail.vin_code}}</div>
+    <div class="m-2 col-5">Цена: {{carDetail.price}}</div>
+    <div class="m-2 col-5">
+      Особенности автомобиля:<br>
+      <span *ngFor="let i of carDetail.car_features; last as l">{{i}}<span *ngIf="!l">, </span></span>
+    </div>
+    <div class="m-2 col-5">
+      Защита автомобиля:<br>
+      <span *ngFor="let i of carDetail.car_security; last as l">{{i}}<span *ngIf="!l">, </span></span>
+    </div>
+    <div class="m-2 col-12">Описания:<br> {{carDetail.description}}</div>
+
+  </div>
+</div>

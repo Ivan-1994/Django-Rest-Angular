@@ -1,0 +1,13 @@
+<div class="p-5 bg-light" style=" border-radius: 20px;">
+  <div class="row">
+    <div class="col-12 border rounded m-1 p-3" *ngFor="let car of cars" routerLink="car/{{car.id}}"
+         (mouseover)="hover[car.id]=true" (mouseleave)="hover[car.id]=false"
+         [ngStyle]="{backgroundColor: hover[car.id]==true  ? '#e9e9e9' : '' }">
+      <h6>{{car.title }}</h6>
+      <p>Марка: {{car.brand}} Модель: {{car.car_model}}</p>
+      <p>Пробег: {{car.mileage}}</p>
+      <p>Год: {{car.year}}</p>
+      <p>Цена: {{car.price | currency:'':''}}</p>
+    </div>
+  </div>
+</div>
